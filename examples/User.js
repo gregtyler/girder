@@ -8,7 +8,7 @@ class User extends Model {
 
   getSchema() {
     return {
-      username: String,
+      username: {type: String, isRequired: true},
       isAdmin: Boolean,
       canAddPage: {type: Boolean, defaultValue: false}
     };

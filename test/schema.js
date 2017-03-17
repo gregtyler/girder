@@ -49,5 +49,9 @@ tap.test('change events', function() {
 
 // Validation
 tap.throws(function() {
+  const badUser = new User({});
+}, {}, 'Error thrown if trying to not setting required properties');
+
+tap.throws(function() {
   author.set({canAddPage: 'invalid value'});
-}, {}, 'Error thrown if trying to use wrong type')
+}, {}, 'Error thrown if trying to use wrong type');
