@@ -1,5 +1,5 @@
 'use strict';
-const Model = require('./Model');
+const Model = require('../index');
 
 class User extends Model {
   getTable() {

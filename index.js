@@ -1,28 +1,114 @@
 'use strict';
-const Model = require('./Model');
-const User = require('./User');
+class SchemaField {
+  constructor(fieldName, definition) {
+    this.name = fieldName;
 
-const author = new User({username: 'guest', isAdmin: false});
+    this.isRequired = false;
+    this.defaultValue = null;
 
-console.log(`"${author.username}" can add page? ${author.canAddPage}`);
-console.log(author.url);
-console.log(author.toJSON());
-
-author.on('change', (changes) => {console.log(`${changes[0].field} was changed from ${changes[0].oldValue} to ${changes[0].newValue}`);});
-
-author
-  .set('canAddPage', true)
-  .set('lastLoggedIn', new Date());
-
-try {
-  author.set({canAddPage: 'invalid value'});
-} catch (e) {
-  console.log('TypeError correctly caught');
+    if (typeof definition === 'object') {
+      if (typeof definition.isRequired !== 'undefined') this.isRequired = definition.isRequired;
+      if (typeof definition.defaultValue !== 'undefined') this.defaultValue = definition.defaultValue;
+      this.type = definition.type;
+    } else {
+      this.type = definition;
+    }
+  }
 }
 
-console.log(author.toJSON());
+class Model {
+  constructor(data, schema) {
+    this._attributes = {};
+    this._events = {};
 
-// Quick-use
-class Page extends Model {}
-const page = new Page({title: 'Home page', slug: '/'});
-console.log(page.get('title'));
+    // Initialise the schema
+    if (this.getSchema && this.getSchema()) {
+      this.initSchema(this.getSchema());
+    }
+
+    // Set initial data
+    this.set(data);
+
+    // Check required values were set
+    if (this._schema) {
+      var _this = this;
+      this._schema.forEach(function(field) {
+        if (field.isRequired && _this[field.name] === null) {
+          throw new Error(`The field "${field.name}" is required but has not been specified`);
+        }
+      });
+    }
+
+    return this;
+  }
+
+  on(eventName, callback) {
+    if (typeof this._events[eventName] !== 'object') this._events[eventName] = [];
+    this._events[eventName].push(callback);
+  }
+
+  emit(eventName) {
+    if (this._events[eventName]) {
+      const args = Array.prototype.slice.apply(arguments).slice(1);
+
+      for (let event of this._events[eventName]) {
+        event.apply(this, args);
+      }
+    }
+  }
+
+  set(name, value) {
+    // If a dictionary was provided, do each update separate
+    if (typeof name === 'object') {
+      for (let singleName in name) {
+        this.set(singleName, name[singleName]);
+      }
+      return this;
+    }
+
+    // Validate the field
+    if (this._schema) {
+      var field = this._schema.find(field => field.name === name);
+      if (field && value !== null && value.constructor !== field.type) {
+        throw new Error(`${name} should be ${field.type.name}, not ${value.constructor.name}`);
+      }
+    }
+
+    // Emit event noting was has changed
+    this.emit('change', [{field: name, oldValue: this._attributes[name], newValue: value}]);
+
+    // Update the underlying object
+    this._attributes[name] = value;
+
+    return this;
+  }
+
+  get(name) {
+    return this._attributes[name];
+  }
+
+  initSchema(schema) {
+    this._schema = [];
+    for (var name in schema) {
+      const field = new SchemaField(name, schema[name]);
+      this._schema.push(field);
+
+      // Set default values
+      this.set(name, field.defaultValue);
+
+      // Define the property
+      Object.defineProperty(this, name, {get: this.get.bind(this, name)});
+    }
+
+    return this;
+  }
+
+  // validate()
+  // undo()?
+
+  toJSON() {
+    return JSON.stringify(this._attributes);
+  }
+}
+
+module.exports = Model;

@@ -1,0 +1,23 @@
+  {
+  "name": "girder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregtyler/girder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregtyler/girder/issues"
+  },
+  "homepage": "https://github.com/gregtyler/girder#readme",
+  "devDependencies": {
+    "tap": "^10.3.0"
+  }
+}
