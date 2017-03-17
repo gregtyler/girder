@@ -18,7 +18,7 @@ class SchemaField {
 
 class Model {
   constructor(data) {
-    this._attributes = {};
+    this._properties = {};
     this._events = {};
 
     // Initialise the schema
@@ -75,16 +75,16 @@ class Model {
     }
 
     // Emit event noting was has changed
-    this.emit('change', {field: name, oldValue: this._attributes[name], newValue: value});
+    this.emit('change', {field: name, oldValue: this._properties[name], newValue: value});
 
     // Update the underlying object
-    this._attributes[name] = value;
+    this._properties[name] = value;
 
     return this;
   }
 
   get(name) {
-    return this._attributes[name];
+    return this._properties[name];
   }
 
   initSchema(schema) {
@@ -107,7 +107,17 @@ class Model {
   // undo()?
 
   toJSON() {
-    return JSON.stringify(this._attributes);
+    const prototype = Object.getPrototypeOf(this);
+    const properties = this._properties;
+    const _this = this;
+
+    // Add calculated properties
+    Object.entries(Object.getOwnPropertyDescriptors(prototype))
+      .filter(([, descriptor]) => typeof descriptor.get === 'function')
+      .forEach(([key]) => {properties[key] = _this[key];});
+
+    // Stringify the result
+    return JSON.stringify(properties);
   }
 }
 
