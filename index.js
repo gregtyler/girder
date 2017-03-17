@@ -114,9 +114,12 @@ class Model {
     const _this = this;
 
     // Add calculated properties
-    Object.entries(Object.getOwnPropertyDescriptors(prototype))
-      .filter(([, descriptor]) => typeof descriptor.get === 'function')
-      .forEach(([key]) => {properties[key] = _this[key];});
+    const descriptors = Object.getOwnPropertyDescriptors(prototype);
+    for (const key in descriptors) {
+      if (typeof descriptors[key].get === 'function') {
+        properties[key] = _this[key];
+      }
+    }
 
     // Stringify the result
     return JSON.stringify(properties);
