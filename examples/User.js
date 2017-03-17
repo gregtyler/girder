@@ -2,10 +2,6 @@
 const Model = require('../index');
 
 class User extends Model {
-  getTable() {
-    return 'user';
-  }
-
   getSchema() {
     return {
       username: {type: String, isRequired: true},
