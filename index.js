@@ -75,7 +75,7 @@ class Model {
     }
 
     // Emit event noting was has changed
-    this.emit('change', [{field: name, oldValue: this._attributes[name], newValue: value}]);
+    this.emit('change', {field: name, oldValue: this._attributes[name], newValue: value});
 
     // Update the underlying object
     this._attributes[name] = value;
