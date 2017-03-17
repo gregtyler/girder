@@ -17,7 +17,7 @@ class SchemaField {
 }
 
 class Model {
-  constructor(data, schema) {
+  constructor(data) {
     this._attributes = {};
     this._events = {};
 
@@ -31,7 +31,7 @@ class Model {
 
     // Check required values were set
     if (this._schema) {
-      var _this = this;
+      const _this = this;
       this._schema.forEach(function(field) {
         if (field.isRequired && _this[field.name] === null) {
           throw new Error(`The field "${field.name}" is required but has not been specified`);
@@ -68,7 +68,7 @@ class Model {
 
     // Validate the field
     if (this._schema) {
-      var field = this._schema.find(field => field.name === name);
+      const field = this._schema.find(field => field.name === name);
       if (field && value !== null && value.constructor !== field.type) {
         throw new Error(`${name} should be ${field.type.name}, not ${value.constructor.name}`);
       }
@@ -89,7 +89,7 @@ class Model {
 
   initSchema(schema) {
     this._schema = [];
-    for (var name in schema) {
+    for (const name in schema) {
       const field = new SchemaField(name, schema[name]);
       this._schema.push(field);
 
