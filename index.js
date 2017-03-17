@@ -80,6 +80,11 @@ class Model {
     // Update the underlying object
     this._properties[name] = value;
 
+    // Define the getter
+    if (!this.hasOwnProperty(name)) {
+      Object.defineProperty(this, name, {get: this.get.bind(this, name)});
+    }
+
     return this;
   }
 
@@ -95,9 +100,6 @@ class Model {
 
       // Set default values
       this.set(name, field.defaultValue);
-
-      // Define the property
-      Object.defineProperty(this, name, {get: this.get.bind(this, name)});
     }
 
     return this;
