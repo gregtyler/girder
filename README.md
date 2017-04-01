@@ -1,6 +1,4 @@
 # Girder
-👷🏾🏗 Made in Scotland of JavaScript
-
 [![Build Status](https://travis-ci.org/gregtyler/girder.svg?branch=master)](https://travis-ci.org/gregtyler/girder?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/gregtyler/girder/badge.svg?branch=master)](https://coveralls.io/github/gregtyler/girder?branch=master)
 
