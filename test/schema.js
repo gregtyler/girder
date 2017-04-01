@@ -1,6 +1,6 @@
 'use strict';
 const tap = require('tap');
-const Model = require('../index');
+const Model = require('../index').Model;
 const User = require('../examples/User');
 
 const author = new User({username: 'guest', isAdmin: false});

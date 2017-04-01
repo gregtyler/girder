@@ -1,5 +1,5 @@
 'use strict';
-const Model = require('../index');
+const Model = require('../index').Model;
 
 class User extends Model {
   getSchema() {

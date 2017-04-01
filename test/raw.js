@@ -1,5 +1,5 @@
 const tap = require('tap');
-const Model = require('../index');
+const Model = require('../index').Model;
 
 // Quick-use
 const page = new Model({title: 'Home page', slug: '/'});
