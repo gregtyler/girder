@@ -108,6 +108,10 @@ class Model {
   // validate()
   // undo()?
 
+  clone() {
+    return new this.constructor(this._properties);
+  }
+
   toJSON() {
     const prototype = Object.getPrototypeOf(this);
     const properties = this._properties;
