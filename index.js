@@ -1,3 +1,4 @@
 module.exports = {
-  Model: require('./src/Model')
+  Model: require('./src/Model'),
+  Collection: require('./src/Collection')
 };
