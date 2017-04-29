@@ -13,6 +13,8 @@ countries.seed([
   {name: 'Nicaragua', continent: 'South America'}
 ]);
 
+tap.type(countries.find(), Model, 'Items seeded in a collection should become Girder models');
+
 tap.equal(countries.all().length, 6, 'Collection.all should return all options');
 
 countries.seed({name: 'South Korea', continent: 'Asia'});

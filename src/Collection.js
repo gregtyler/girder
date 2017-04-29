@@ -20,7 +20,7 @@ class Collection {
     }
 
     // Build the new model
-    const newModel = item.constructor.name === 'Object' ? Object.assign({}, item) : item;
+    const newModel = item instanceof Model ? item.clone() : new Model(item);
     this._models.push(newModel);
     return newModel;
   }
@@ -67,7 +67,7 @@ class Collection {
   toJSON() {
     return '[' + this._models.map(function(model) {
       if (model instanceof Model) {
-        return model.toJSON()
+        return model.toJSON();
       } else {
         return JSON.stringify(model);
       }
