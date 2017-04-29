@@ -1,7 +1,7 @@
   {
   "name": "girder",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Generic, simple and sensible data management for JavaScript",
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js"
@@ -11,8 +11,15 @@
     "url": "git+https://github.com/gregtyler/girder.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "gregtyler",
   "license": "ISC",
+  "files": [
+    "src/Collection.js",
+    "src/Eventable.js",
+    "src/Model.js",
+    "index.js",
+    "README.md",
+  ],
   "bugs": {
     "url": "https://github.com/gregtyler/girder/issues"
   },
