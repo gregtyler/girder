@@ -1,8 +1,11 @@
 'use strict';
 const Model = require('./Model.js');
+const Eventable = require('./Eventable');
 
-class Collection {
+class Collection extends Eventable {
   constructor() {
+    super();
+
     this._models = [];
     this.table;
     this.key = '_id';

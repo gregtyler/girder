@@ -1,4 +1,6 @@
 'use strict';
+const Eventable = require('./Eventable');
+
 class SchemaField {
   constructor(fieldName, definition) {
     this.name = fieldName;
@@ -16,8 +18,10 @@ class SchemaField {
   }
 }
 
-class Model {
+class Model extends Eventable {
   constructor(data) {
+    super();
+
     this._properties = {};
     this._events = {};
 
@@ -40,21 +44,6 @@ class Model {
     }
 
     return this;
-  }
-
-  on(eventName, callback) {
-    if (typeof this._events[eventName] !== 'object') this._events[eventName] = [];
-    this._events[eventName].push(callback);
-  }
-
-  emit(eventName) {
-    if (this._events[eventName]) {
-      const args = Array.prototype.slice.apply(arguments).slice(1);
-
-      for (let event of this._events[eventName]) {
-        event.apply(this, args);
-      }
-    }
   }
 
   set(name, value) {
