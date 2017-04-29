@@ -40,6 +40,27 @@ tap.throws(function() {
   countries.filter({wrongProperty: true});
 }, {}, 'Error thrown if filtering on non-existant key');
 
+// Singular deletion
+countries.delete({name: 'Spain'});
+tap.equal(countries.find({name: 'Spain'}), null, 'Deleted items are removed');
+tap.equal(countries.all().length, 6, 'Deleting items doesn\'t remove anything else');
+
+// Mass Deletion
+countries.delete({continent: 'Africa'});
+tap.equal(countries.find({name: 'Mali'}), null, 'Mass deleted items are removed');
+tap.equal(countries.all().length, 4, 'Mass deleting items doesn\'t remove anything else');
+
+// Delete events
+tap.test('Deletion events are thrown', function() {
+  return new Promise(function(resolve) {
+    countries.on('delete', () => {
+      resolve();
+    });
+
+    countries.delete({name: 'Nicaragua'});
+  });
+});
+
 // Check that JSONifying objects works
 const friends = new Collection();
 friends.push({name: 'Joey'});

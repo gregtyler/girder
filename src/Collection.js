@@ -67,6 +67,17 @@ class Collection extends Eventable {
     }
   }
 
+  delete(criteria) {
+    for (let toDelete of this.all(criteria).reverse()) {
+      for (let index in this._models) {
+        if (this._models[index] === toDelete) {
+          this.emit('delete', this._models);
+          this._models.splice(index, 1);
+        }
+      }
+    }
+  }
+
   toJSON() {
     return '[' + this._models.map(function(model) {
       return model.toJSON();
