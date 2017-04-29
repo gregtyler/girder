@@ -66,11 +66,7 @@ class Collection {
 
   toJSON() {
     return '[' + this._models.map(function(model) {
-      if (model instanceof Model) {
-        return model.toJSON();
-      } else {
-        return JSON.stringify(model);
-      }
+      return model.toJSON();
     }).join(',') + ']';
   }
 }
