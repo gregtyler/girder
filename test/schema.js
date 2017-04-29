@@ -32,17 +32,33 @@ tap.equal(author.lastLoggedIn, loginDate, 'New properties can be defined');
 tap.equal(new Date(JSON.parse(author.toJSON()).lastLoggedIn).getTime(), loginDate.getTime(), 'New properties are included in JSON');
 
 // Change events
-tap.test('change events', function() {
+tap.test('Can listen to change events', function() {
+  let testComplete = false;
   return new Promise(function(resolve) {
     author.on('change', (change) => {
-      tap.equal(change.field, 'displayName');
-      tap.equal(change.oldValue, undefined);
-      tap.equal(change.newValue, 'Guest');
-      tap.end();
-      resolve();
+      if (!testComplete) {
+        tap.equal(change.field, 'displayName');
+        tap.equal(change.oldValue, undefined);
+        tap.equal(change.newValue, 'Guest');
+        tap.end();
+
+        testComplete = true;
+
+        resolve();
+      }
     });
 
     author.set('displayName', 'Guest');
+  });
+});
+
+tap.test('Can attach multiple events', function() {
+  return new Promise(function(resolve) {
+    author.on('change', () => {
+      resolve();
+    });
+
+    author.set('displayName', 'Tyrole');
   });
 });
 
