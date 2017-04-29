@@ -61,6 +61,32 @@ tap.test('Deletion events are thrown', function() {
   });
 });
 
+// Creation events
+tap.test('Creation event is emitted when new objects are added', function() {
+  return new Promise(function(resolve) {
+    countries.on('create', (country) => {
+      tap.equal(country.name, 'India');
+      tap.end();
+
+      resolve();
+    });
+
+    countries.push({name: 'India', continent: 'Asia'});
+  });
+});
+
+tap.test('Creation event is not emitted when duplicate objects are added', function() {
+  return new Promise(function(resolve, reject) {
+    // Reject the promise if the event fires
+    countries.on('create', reject);
+
+    // Wait half a second for the creation event to fire
+    setTimeout(resolve, 500);
+
+    countries.push({name: 'India', continent: 'Asia'});
+  });
+});
+
 // Check that JSONifying objects works
 const friends = new Collection();
 friends.push({name: 'Joey'});

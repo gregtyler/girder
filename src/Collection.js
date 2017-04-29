@@ -25,6 +25,10 @@ class Collection extends Eventable {
     // Build the new model
     const newModel = item instanceof Model ? item.clone() : new Model(item);
     this._models.push(newModel);
+
+    // Emit a creation event
+    this.emit('create', newModel);
+
     return newModel;
   }
 
