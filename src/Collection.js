@@ -8,9 +8,9 @@ class Collection {
     this.key = '_id';
   }
 
-  seed(item) {
+  push(item) {
     if (Array.isArray(item)) {
-      return item.map(this.seed.bind(this));
+      return item.map(this.push.bind(this));
     }
 
     // See if the model already exists

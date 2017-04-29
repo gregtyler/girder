@@ -4,7 +4,7 @@ const Model = require('../index').Model;
 
 const countries = new Collection();
 
-countries.seed([
+countries.push([
   {name: 'Spain', continent: 'Europe'},
   {name: 'Austria', continent: 'Europe'},
   {name: 'Canada', continent: 'North America'},
@@ -13,14 +13,14 @@ countries.seed([
   {name: 'Nicaragua', continent: 'South America'}
 ]);
 
-tap.type(countries.find(), Model, 'Items seeded in a collection should become Girder models');
+tap.type(countries.find(), Model, 'Items pushed in a collection should become Girder models');
 
 tap.equal(countries.all().length, 6, 'Collection.all should return all options');
 
-countries.seed({name: 'South Korea', continent: 'Asia'});
-tap.equal(countries.all().length, 7, 'Should be able to seed individual items');
+countries.push({name: 'South Korea', continent: 'Asia'});
+tap.equal(countries.all().length, 7, 'Should be able to push individual items');
 
-countries.seed({name: 'Spain', continent: 'Europe'});
+countries.push({name: 'Spain', continent: 'Europe'});
 tap.equal(countries.all().length, 7, 'Cannot add duplicate items');
 
 // Filtering
@@ -42,11 +42,11 @@ tap.throws(function() {
 
 // Check that JSONifying objects works
 const friends = new Collection();
-friends.seed({name: 'Joey'});
-friends.seed({name: 'Phoebe'});
+friends.push({name: 'Joey'});
+friends.push({name: 'Phoebe'});
 tap.equal(friends.toJSON(), '[{"name":"Joey"},{"name":"Phoebe"}]');
 
 // Check that JSONifying models works
 const dogs = new Collection();
-dogs.seed(new Model({name: 'Fido', size: 'M'}));
+dogs.push(new Model({name: 'Fido', size: 'M'}));
 tap.equal(dogs.toJSON(), '[{"name":"Fido","size":"M"}]');
