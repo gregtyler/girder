@@ -26,5 +26,5 @@ class Car extends Girders {
 
 const peugeot309 = new Car({name: 'Peugeot 309', doors: 5});
 
-console.log(`<a href="${peugeot309.url}">${peugeot309.name}</a> has `${peugeot309.doors}`);
+console.log(`<a href="${peugeot309.url}">${peugeot309.name}</a> has ${peugeot309.doors}`);
 ```
