@@ -1,6 +1,6 @@
 # Girders
 [![Build Status](https://travis-ci.org/gregtyler/girders.svg?branch=master)](https://travis-ci.org/gregtyler/girders?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/gregtyler/girders/badge.svg?branch=master)](https://coveralls.io/github/gregtyler/girders?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/gregtyler/girder/badge.svg?branch=master)](https://coveralls.io/github/gregtyler/girder?branch=master)
 
 A one-stop JavaScript shop for models. Define once, use on both client and server side, with (still to be developed!) easy integration with IndexedDB, GraphQL and REST endpoints.
 
