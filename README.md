@@ -1,6 +1,6 @@
-# Girder
-[![Build Status](https://travis-ci.org/gregtyler/girder.svg?branch=master)](https://travis-ci.org/gregtyler/girder?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/gregtyler/girder/badge.svg?branch=master)](https://coveralls.io/github/gregtyler/girder?branch=master)
+# Girders
+[![Build Status](https://travis-ci.org/gregtyler/girders.svg?branch=master)](https://travis-ci.org/gregtyler/girders?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/gregtyler/girders/badge.svg?branch=master)](https://coveralls.io/github/gregtyler/girders?branch=master)
 
 A one-stop JavaScript shop for models. Define once, use on both client and server side, with (still to be developed!) easy integration with IndexedDB, GraphQL and REST endpoints.
 
@@ -8,9 +8,9 @@ Written in the latest ECMAScript for maximum readability and simplicity of use.
 
 ## Quick example
 ```javascript
-const Girder = require('girder-js');
+const Girders = require('girders');
 
-class Car extends Girder {
+class Car extends Girders {
   getSchema() {
     return {
       id: Integer,

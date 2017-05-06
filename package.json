@@ -1,5 +1,5 @@
   {
-  "name": "girder",
+  "name": "girders",
   "version": "0.1.0",
   "description": "Generic, simple and sensible data management for JavaScript",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gregtyler/girder.git"
+    "url": "git+https://github.com/gregtyler/girders.git"
   },
   "keywords": [],
   "author": "gregtyler",
@@ -21,9 +21,9 @@
     "README.md",
   ],
   "bugs": {
-    "url": "https://github.com/gregtyler/girder/issues"
+    "url": "https://github.com/gregtyler/girders/issues"
   },
-  "homepage": "https://github.com/gregtyler/girder#readme",
+  "homepage": "https://github.com/gregtyler/girders#readme",
   "devDependencies": {
     "tap": "^10.3.0"
   }

@@ -13,7 +13,7 @@ countries.push([
   {name: 'Nicaragua', continent: 'South America'}
 ]);
 
-tap.type(countries.find(), Model, 'Items pushed in a collection should become Girder models');
+tap.type(countries.find(), Model, 'Items pushed in a collection should become Girders models');
 
 tap.equal(countries.all().length, 6, 'Collection.all should return all options');
 
