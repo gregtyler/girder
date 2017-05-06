@@ -18,7 +18,7 @@
     "src/Eventable.js",
     "src/Model.js",
     "index.js",
-    "README.md",
+    "README.md"
   ],
   "bugs": {
     "url": "https://github.com/gregtyler/girders/issues"
