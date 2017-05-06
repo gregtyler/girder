@@ -10,12 +10,12 @@ Written in the latest ECMAScript for maximum readability and simplicity of use.
 ```javascript
 const Girders = require('girders');
 
-class Car extends Girders {
+class Car extends Girders.Model {
   getSchema() {
     return {
-      id: Integer,
+      id: Number,
       name: {type: String, isRequired: true},
-      doors: Integer
+      doors: Number
     };
   }
 
@@ -26,5 +26,5 @@ class Car extends Girders {
 
 const peugeot309 = new Car({name: 'Peugeot 309', doors: 5});
 
-console.log(`<a href="${peugeot309.url}">${peugeot309.name}</a> has ${peugeot309.doors}`);
+console.log(`<a href="${peugeot309.url}">${peugeot309.name}</a> has ${peugeot309.doors} doors`);
 ```
